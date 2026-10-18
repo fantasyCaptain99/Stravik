@@ -1,0 +1,188 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Article typography.
+   Scoped to .prose-stravik so it never leaks into the rest of the site.
+   Measure is capped at ~68ch by the container for comfortable reading.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.prose-stravik {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--color-ink) 78%, transparent);
+}
+
+.prose-stravik > * + * {
+  margin-top: 1.5em;
+}
+
+.prose-stravik h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin-top: 2.4em;
+  margin-bottom: 0.1em;
+}
+
+.prose-stravik h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  margin-top: 2em;
+  margin-bottom: 0.1em;
+}
+
+/* A hairline above each major heading gives the article editorial structure. */
+.prose-stravik h2::before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--color-primary);
+  margin-bottom: 1.1rem;
+}
+
+.prose-stravik p {
+  text-wrap: pretty;
+}
+
+.prose-stravik strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.prose-stravik em {
+  font-style: italic;
+}
+
+.prose-stravik a {
+  color: var(--color-primary-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: color 0.25s var(--ease-out-expo);
+}
+
+.prose-stravik a:hover {
+  color: var(--color-ink);
+}
+
+.prose-stravik ul,
+.prose-stravik ol {
+  padding-left: 0;
+  list-style: none;
+}
+
+.prose-stravik li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.prose-stravik li + li {
+  margin-top: 0.7em;
+}
+
+.prose-stravik ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.78em;
+  width: 0.7rem;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.prose-stravik ol {
+  counter-reset: prose-counter;
+}
+
+.prose-stravik ol > li {
+  counter-increment: prose-counter;
+}
+
+.prose-stravik ol > li::before {
+  content: "(" counter(prose-counter, decimal-leading-zero) ")";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  color: var(--color-primary-deep);
+}
+
+.prose-stravik blockquote {
+  border-left: 2px solid var(--color-primary);
+  padding-left: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.15em;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+.prose-stravik code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: color-mix(in srgb, var(--color-primary) 11%, transparent);
+  padding: 0.15em 0.4em;
+  border-radius: 2px;
+  color: var(--color-ink);
+}
+
+.prose-stravik pre {
+  background: var(--color-ink);
+  color: var(--color-off-white);
+  padding: 1.4rem;
+  border-radius: 2px;
+  /* Long lines scroll inside the block; the page never scrolls sideways. */
+  overflow-x: auto;
+  font-size: 0.86em;
+  line-height: 1.6;
+}
+
+.prose-stravik pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 1em;
+}
+
+.prose-stravik hr {
+  border: 0;
+  height: 1px;
+  background: var(--color-rule);
+  margin-block: 3em;
+}
+
+.prose-stravik img {
+  width: 100%;
+  height: auto;
+}
+
+/* Tables scroll independently rather than forcing page overflow. */
+.prose-stravik table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose-stravik th,
+.prose-stravik td {
+  text-align: left;
+  padding: 0.7em 1em 0.7em 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.prose-stravik th {
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary-deep);
+}
